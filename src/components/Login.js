@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import apiFacade from "../facades/apiFacade";
 import { Modal } from "react-bootstrap";
 import printError from "../utils/error";
+import { useLocation } from "react-router-dom";
 
 export const Login = ({
   isLoggedIn,
@@ -12,6 +13,10 @@ export const Login = ({
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
+  //If redirected from protected page
+  const { state } = useLocation();
+  const from = state ? state.from : "/";
+
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     setError("");
@@ -21,7 +26,7 @@ export const Login = ({
     e.preventDefault();
     apiFacade
       .login(user)
-      .then((res) => setLoginStatus(!isLoggedIn))
+      .then((res) => setLoginStatus(!isLoggedIn, from))
       .catch((promise) => {
         if (promise.fullError) {
           printError(promise, setError);

@@ -7,9 +7,9 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let history = useHistory();
 
-  const setLoginStatus = (status) => {
+  const setLoginStatus = (status, pageToGoTo) => {
     setIsLoggedIn(status);
-    history.push("/");
+    history.push(pageToGoTo);
   };
 
   return (
