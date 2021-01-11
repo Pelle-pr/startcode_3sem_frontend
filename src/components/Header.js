@@ -10,7 +10,6 @@ import Admin from "./Admin";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
 import PrivateRoute from "./PrivateRoute";
-import apiFacade from "../facades/apiFacade";
 import Students from "./Students";
 
 export default function Header({
@@ -19,20 +18,10 @@ export default function Header({
   loginMsg,
   handleLogin,
   showLogin,
+  handleRegister,
+  showRegister,
+  logout,
 }) {
-  const [showRegister, setShowRegister] = useState(false);
-
-  const handleRegister = () => {
-    setShowRegister(!showRegister);
-  };
-
-  const logout = () => {
-    apiFacade.logout();
-    setLoginStatus(false);
-    handleLogin(!showLogin);
-    setShowRegister(false);
-  };
-
   let user = isLoggedIn ? `Logged in as: ${localStorage.getItem("user")}` : "";
   let roles = isLoggedIn ? `Roles: ${localStorage.getItem("roles")}` : "";
 
