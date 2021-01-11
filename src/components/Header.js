@@ -13,13 +13,15 @@ import PrivateRoute from "./PrivateRoute";
 import apiFacade from "../facades/apiFacade";
 import Students from "./Students";
 
-export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
-  const [showLogin, setShowLogin] = useState(false);
+export default function Header({
+  isLoggedIn,
+  setLoginStatus,
+  loginMsg,
+  handleLogin,
+  showLogin,
+}) {
   const [showRegister, setShowRegister] = useState(false);
 
-  const handleLogin = () => {
-    setShowLogin(!showLogin);
-  };
   const handleRegister = () => {
     setShowRegister(!showRegister);
   };
@@ -27,7 +29,7 @@ export default function Header({ isLoggedIn, setLoginStatus, loginMsg }) {
   const logout = () => {
     apiFacade.logout();
     setLoginStatus(false);
-    setShowLogin(false);
+    handleLogin(!showLogin);
     setShowRegister(false);
   };
 

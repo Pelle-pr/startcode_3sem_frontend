@@ -7,6 +7,12 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   let history = useHistory();
 
+  const [showLogin, setShowLogin] = useState(false);
+
+  const handleLogin = () => {
+    setShowLogin(!showLogin);
+  };
+
   const setLoginStatus = (status, pageToGoTo) => {
     setIsLoggedIn(status);
     history.push(pageToGoTo);
@@ -18,6 +24,8 @@ export default function App() {
         isLoggedIn={isLoggedIn}
         loginMsg={isLoggedIn ? "Log out" : "Login"}
         setLoginStatus={setLoginStatus}
+        handleLogin={handleLogin}
+        showLogin={showLogin}
       />
     </div>
   );
